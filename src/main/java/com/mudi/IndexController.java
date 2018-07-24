@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class IndexController {
 
 	@RequestMapping("/")
-	@ResponseBody
+	//@ResponseBody
 	public String view() {
-		return "这是首页";
+		return "/demo/index";
 	}
 }
