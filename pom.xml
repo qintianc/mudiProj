@@ -70,6 +70,24 @@
 			<scope>provided</scope>
 		</dependency>
 
+
+		<!-- mybatis -->
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<!-- 导入Mysql数据库链接jar包 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<!-- 导入oracle包 -->
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc7</artifactId>
+			<version>12.1.0.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -80,6 +98,7 @@
 			</plugin>
 		</plugins>
 
+		<!-- 设置打包名称 -->
 		<finalName>mudiProj</finalName>
 	</build>
 
