@@ -8,6 +8,6 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface DataTest {
 
-	@Select("select NAME,AGE from T_NAME WHERE ID = 1")
+	@Select("select NAME,AGE from T_USER WHERE ID = 1")
 	public Map<String,Object> getInfo();
 }

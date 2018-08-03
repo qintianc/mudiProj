@@ -8,13 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mudi.demo.data.DataTest;
+import com.mudi.demo.data.MyUserMapper;
+import com.mudi.demo.model.MyUser;
 
 @Controller
-@RequestMapping("/demo")
+@RequestMapping("/demo/hello")
 public class HelloController {
 
 	@Autowired
 	private DataTest dataTest;
+	@Autowired
+	private MyUserMapper myUserMapper;
 
 	@RequestMapping("/hello")
 	@ResponseBody
@@ -24,8 +28,8 @@ public class HelloController {
 
 	@RequestMapping("/mybatis")
 	@ResponseBody
-	public Map<String, Object> mybatis() {
-		Map<String, Object> info = dataTest.getInfo();
-		return info;
+	public MyUser mybatis() {
+		MyUser user = myUserMapper.getUser("admin");
+		return user;
 	}
 }
