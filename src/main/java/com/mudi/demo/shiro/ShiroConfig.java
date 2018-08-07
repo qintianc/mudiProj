@@ -25,7 +25,7 @@ public class ShiroConfig {
 		Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
 
 		// anon:不需要登录就可以访问
-		filterChainDefinitionMap.put("/static/**", "anon");
+		filterChainDefinitionMap.put("/demo/hello/**", "anon");
 		// 配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
 		filterChainDefinitionMap.put("/logout", "logout");
 

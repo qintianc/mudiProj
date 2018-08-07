@@ -1,5 +1,8 @@
 package com.mudi.demo.data;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
@@ -21,4 +24,7 @@ public interface MyUserMapper {
 	})
 	@Select("select * from T_USER WHERE USERNAME = '${userName}'")
 	public MyUser getUser(@Param(value="userName") String userName);
+	
+	@Select("select * from T_USER")
+	public List<Map<String,Object>> getList();
 }
