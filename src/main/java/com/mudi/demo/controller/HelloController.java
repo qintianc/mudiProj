@@ -19,7 +19,7 @@ public class HelloController {
 	@Autowired
 	private MyUserMapper myUserMapper;
 
-	@RequestMapping("/hello")
+	@RequestMapping("/")
 	@ResponseBody
 	public String view() {
 		return "hello world";
