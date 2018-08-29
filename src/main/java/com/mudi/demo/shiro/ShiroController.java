@@ -1,4 +1,4 @@
-package com.mudi.demo.controller;
+package com.mudi.demo.shiro;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresRoles;
