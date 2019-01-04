@@ -13,7 +13,7 @@ public class ShiroController {
 
 	@RequestMapping("/login")
 	public String view() {
-		return "/demo/login";
+		return "/demo/index";
 	}
 
 	@RequestMapping("/admin")
