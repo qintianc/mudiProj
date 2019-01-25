@@ -1,4 +1,4 @@
-package com.mudi.demo.redis;
+package com.mudi.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

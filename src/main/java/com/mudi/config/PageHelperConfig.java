@@ -1,4 +1,4 @@
-package com.mudi.demo.data;
+package com.mudi.config;
 
 import java.util.Properties;
 

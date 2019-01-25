@@ -1,4 +1,4 @@
-package com.mudi.demo.shiro;
+package com.mudi.config.shiro;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -37,7 +37,7 @@ public class MyShiroRealm extends AuthorizingRealm {
 
 		UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
 
-		// 从数据库获取对应用户名密码的用户
+		// TODO 从数据库获取对应用户名密码的用户
 		String userName = token.getUsername();
 		MyUser user = myUserService.getUser(userName);
 		String password = user.getPassword();
@@ -47,28 +47,39 @@ public class MyShiroRealm extends AuthorizingRealm {
 		} else if (!password.equals(new String(token.getPassword()))) {
 			throw new AccountException("密码不正确");
 		}
+		
+		//设置是否记住我
+		//token.setRememberMe(true);
+		
 		return new SimpleAuthenticationInfo(token.getPrincipal(), password, getName());
 	}
 
 	/**
-	 * 获取授权信息
+	 * 获取授权信息,获取该用户的权限和角色信息
 	 *
 	 * @param principalCollection
 	 * @return
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-		System.out.println("————权限认证————");
+		System.out.println("————获取授权信息————");
 		String username = (String) SecurityUtils.getSubject().getPrincipal();
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		// 获得该用户角色
+		// TODO 获得该用户角色
 		MyUser user = myUserService.getUser(username);
 		String role = user.getRole();
-		Set<String> set = new HashSet<>();
+		Set<String> roles = new HashSet<>();
 		// 需要将 role 封装到 Set 作为 info.setRoles() 的参数
-		set.add(role);
+		roles.add(role);
 		// 设置该用户拥有的角色
-		info.setRoles(set);
+		info.setRoles(roles);
+
+		// 权限
+		Set<String> permits = new HashSet<String>();
+		permits.add("permits:read");
+		permits.add("permits:write");
+		info.setStringPermissions(permits);
+
 		return info;
 	}
 }

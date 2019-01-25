@@ -1,7 +1,9 @@
-package com.mudi.demo.shiro;
+package com.mudi.config.shiro;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import javax.servlet.Filter;
 
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
@@ -25,23 +27,27 @@ public class ShiroConfig {
 		Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
 
 		// anon:不需要登录就可以访问
+		filterChainDefinitionMap.put("/", "anon");
 		filterChainDefinitionMap.put("/demo/**", "anon");
 		// 配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
-		filterChainDefinitionMap.put("/logout", "logout");
-
-		// filterChainDefinitionMap.put("/demo/shiro/admin", "roles[admin-role]");
-		// filterChainDefinitionMap.put("/demo/shiro/root", "roles[root-role]");
+		filterChainDefinitionMap.put("/shiro/logout", "logout");
+		// 只有role为admin-role才能登录
+		filterChainDefinitionMap.put("/shiro/admin", "roles[admin-role]");
+		filterChainDefinitionMap.put("/shiro/root", "roles[root-role]");
 		// 过滤链定义，从上向下顺序执行，一般将/**放在最为下边 ,这是一个坑呢，一不小心代码就不好使了;
 		// authc:指定URL必须认证通过才可以访问-->
 		filterChainDefinitionMap.put("/**", "authc");
 
-		// 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面 ,或 "/login" 映射
-		shiroFilterFactoryBean.setLoginUrl("/demo/shiro/login");
-		// 登录成功后要跳转的链接
-		// shiroFilterFactoryBean.setSuccessUrl("/index");
+		// 自定义拦截器
+		Map<String, Filter> map = new LinkedHashMap<String, Filter>();
+		map.put("authc", new MyFormAuthenticationFilter());
+		shiroFilterFactoryBean.setFilters(map);
 
-		// 未授权界面;
-		// shiroFilterFactoryBean.setUnauthorizedUrl("/403");
+		// 用户登录页面，如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面 ,或 "/login" 映射
+		shiroFilterFactoryBean.setLoginUrl("/shiro/login");
+		// 未授权界面
+		shiroFilterFactoryBean.setUnauthorizedUrl("/shiro/403");
+		
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		return shiroFilterFactoryBean;
 	}

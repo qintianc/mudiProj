@@ -1,4 +1,4 @@
-package com.mudi.demo.redis;
+package com.mudi.util;
 
 import java.io.Serializable;
 import java.util.List;
