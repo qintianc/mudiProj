@@ -48,7 +48,7 @@ public class MyShiroRealm extends AuthorizingRealm {
 			throw new AccountException("密码不正确");
 		}
 		
-		//设置是否记住我 
+		//设置是否记住我
 		//token.setRememberMe(true);
 		
 		return new SimpleAuthenticationInfo(token.getPrincipal(), password, getName());
