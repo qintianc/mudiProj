@@ -187,7 +187,7 @@
 					<skipTests>true</skipTests>
 					<testFailureIgnore>true</testFailureIgnore>
 				</configuration>
-			</plugin>
+			</plugin> 
 		</plugins>
 
 		<!-- 设置打包名称 -->
